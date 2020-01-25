@@ -1,0 +1,237 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://them_font.tres" type="Theme" id=1]
+[ext_resource path="res://HUD.gd" type="Script" id=2]
+[ext_resource path="res://Assets/energy_bar_bg.png" type="Texture" id=3]
+[ext_resource path="res://Assets/energy_bar_fill.png" type="Texture" id=4]
+
+[node name="MarginContainer" type="MarginContainer"]
+margin_right = 83.0
+margin_bottom = 137.0
+theme = ExtResource( 1 )
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 158.0
+margin_bottom = 187.0
+
+[node name="VBoxPreview" type="VBoxContainer" parent="VBoxContainer"]
+editor/display_folded = true
+margin_right = 83.0
+margin_bottom = 103.0
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxPreview"]
+margin_right = 83.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "NEXT"
+align = 1
+
+[node name="ShapePreview" type="GridContainer" parent="VBoxContainer/VBoxPreview"]
+margin_top = 20.0
+margin_right = 83.0
+margin_bottom = 103.0
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
+columns = 4
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 21.0
+margin_right = 41.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 42.0
+margin_right = 62.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect4" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 63.0
+margin_right = 83.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect5" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_top = 21.0
+margin_right = 20.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect6" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 21.0
+margin_top = 21.0
+margin_right = 41.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect7" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 42.0
+margin_top = 21.0
+margin_right = 62.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect8" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 63.0
+margin_top = 21.0
+margin_right = 83.0
+margin_bottom = 41.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect9" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_top = 42.0
+margin_right = 20.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect10" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 21.0
+margin_top = 42.0
+margin_right = 41.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect11" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 42.0
+margin_top = 42.0
+margin_right = 62.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect12" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 63.0
+margin_top = 42.0
+margin_right = 83.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect13" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_top = 63.0
+margin_right = 20.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect14" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 21.0
+margin_top = 63.0
+margin_right = 41.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect15" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 42.0
+margin_top = 63.0
+margin_right = 62.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="ColorRect16" type="ColorRect" parent="VBoxContainer/VBoxPreview/ShapePreview"]
+margin_left = 63.0
+margin_top = 63.0
+margin_right = 83.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 20, 20 )
+color = Color( 0, 0, 1, 1 )
+
+[node name="VBoxStatistic" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 107.0
+margin_right = 148.0
+margin_bottom = 157.0
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="LevelContainer" type="HBoxContainer" parent="VBoxContainer/VBoxStatistic"]
+margin_right = 148.0
+margin_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxStatistic/LevelContainer"]
+margin_top = 7.0
+margin_right = 53.0
+margin_bottom = 23.0
+text = "LEVEL"
+
+[node name="Level_current" type="Label" parent="VBoxContainer/VBoxStatistic/LevelContainer"]
+margin_left = 57.0
+margin_top = 7.0
+margin_right = 66.0
+margin_bottom = 23.0
+text = "1"
+
+[node name="TextureProgress" type="TextureProgress" parent="VBoxContainer/VBoxStatistic/LevelContainer"]
+margin_left = 70.0
+margin_right = 135.0
+margin_bottom = 30.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 20.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+nine_patch_stretch = true
+stretch_margin_left = 50
+stretch_margin_top = 15
+stretch_margin_right = 15
+stretch_margin_bottom = 15
+
+[node name="Level_next" type="Label" parent="VBoxContainer/VBoxStatistic/LevelContainer"]
+margin_left = 139.0
+margin_top = 7.0
+margin_right = 148.0
+margin_bottom = 23.0
+size_flags_horizontal = 0
+text = "2"
+
+[node name="ScoreContainer" type="HBoxContainer" parent="VBoxContainer/VBoxStatistic"]
+margin_top = 34.0
+margin_right = 69.0
+margin_bottom = 50.0
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxStatistic/ScoreContainer"]
+margin_right = 56.0
+margin_bottom = 16.0
+text = "SCORE"
+
+[node name="Score" type="Label" parent="VBoxContainer/VBoxStatistic/ScoreContainer"]
+margin_left = 60.0
+margin_right = 69.0
+margin_bottom = 16.0
+text = "0"
+
+[node name="Final" type="Label" parent="VBoxContainer"]
+margin_top = 161.0
+margin_right = 148.0
+margin_bottom = 177.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+
