@@ -19,7 +19,7 @@ script = ExtResource( 2 )
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 158.0
-margin_bottom = 187.0
+margin_bottom = 207.0
 
 [node name="VBoxPreview" type="VBoxContainer" parent="VBoxContainer"]
 editor/display_folded = true
@@ -165,11 +165,12 @@ color = Color( 0, 0, 1, 1 )
 [node name="VBoxStatistic" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 107.0
 margin_right = 148.0
-margin_bottom = 157.0
+margin_bottom = 177.0
 size_flags_horizontal = 0
 alignment = 1
 
 [node name="LevelContainer" type="HBoxContainer" parent="VBoxContainer/VBoxStatistic"]
+editor/display_folded = true
 margin_right = 148.0
 margin_bottom = 30.0
 size_flags_horizontal = 0
@@ -229,9 +230,26 @@ margin_right = 69.0
 margin_bottom = 16.0
 text = "0"
 
+[node name="TimeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxStatistic"]
+margin_top = 54.0
+margin_right = 80.0
+margin_bottom = 70.0
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxStatistic/TimeContainer"]
+margin_right = 67.0
+margin_bottom = 16.0
+text = "TIME ms"
+
+[node name="Time" type="Label" parent="VBoxContainer/VBoxStatistic/TimeContainer"]
+margin_left = 71.0
+margin_right = 80.0
+margin_bottom = 16.0
+text = "0"
+
 [node name="Final" type="Label" parent="VBoxContainer"]
-margin_top = 161.0
+margin_top = 181.0
 margin_right = 148.0
-margin_bottom = 177.0
+margin_bottom = 197.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 

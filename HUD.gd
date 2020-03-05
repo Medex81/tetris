@@ -54,3 +54,7 @@ func _on_GridContainer_set_score(score):
 
 func _on_GridContainer_set_preview(idxs):
 	set_preview(idxs)
+
+
+func _on_GridContainer_set_time(time_ms):
+	$VBoxContainer/VBoxStatistic/TimeContainer/Time.text = str(time_ms)

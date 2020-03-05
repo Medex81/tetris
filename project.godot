@@ -19,6 +19,10 @@ config/name="tetris"
 run/main_scene="res://mainD.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+State_mgr="*res://Managers/State_mgr.gd"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"

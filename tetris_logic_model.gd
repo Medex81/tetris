@@ -4,10 +4,7 @@ extends Node
 var col_count
 var row_count
 
-# Модель игрового поля
-var model_array = []
-
-var shape_width = 4
+const shape_width = 4
 
 # Фигуры в массивах координат
 # Квадрат
@@ -46,25 +43,51 @@ var s_row = [
 
 # Массив фигур для генерации в игровом поле
 var shapes = [s_square, s_trigon, s_zet, s_ru_g, s_row, s_zet_inv, s_ru_g_inv]
+# Словарь со смещениями фигур в зависимости от нажатой кнопки
+const direct = {"ui_left": [-1, 0], "ui_right": [1, 0], "ui_down": [0, 1], "ui_up": [0, 0]}
+enum {E_RUN, E_STOP}
+const match_to_next_level = 20
+const match_cost = 10
+# Варианты столкновения фигур с объектами игрового поля
+enum {E_NONE, E_WALLS, E_BOTTOM, E_SHAPES}
+const save_section = "logic_model"
+
+# Модель игрового поля
+var model_array = []
 # Текущая фигура отображаемая в игровом поле
 var current_shape
 var next_shape_idx = null
-# Словарь со смещениями фигур в зависимости от нажатой кнопки
-var direct = {"ui_left": [-1, 0], "ui_right": [1, 0], "ui_down": [0, 1], "ui_up": [0, 0]}
-# Варианты столкновения фигур с объектами игрового поля
-enum {E_NONE, E_WALLS, E_BOTTOM, E_SHAPES}
 # Номер хода
 var current_step = 0
-enum {E_RUN, E_STOP}
 var GameState = E_STOP
 var collaide = E_NONE
-
 var level = 1
 var score = 0
-var match_to_next_level = 20
 var current_match = 0
-var match_cost = 10
 var bMatched = false
+
+func serialize():
+	var logic_model = {
+	"model_array": model_array,
+	"current_shape": current_shape,
+	"next_shape_idx": next_shape_idx,
+	"current_step": current_step,
+	"GameState": GameState,
+	"collaide": collaide,
+	"level": level,
+	"score": score}
+	State_mgr.set_dict(save_section, logic_model)
+	
+func deserialize():
+	var logic_model = State_mgr.get_dict(save_section)
+	model_array = State_mgr.get_value(logic_model, "model_array", model_array)
+	current_shape = State_mgr.get_value(logic_model, "current_shape", current_shape)
+	next_shape_idx = State_mgr.get_value(logic_model, "next_shape_idx", next_shape_idx)
+	current_step = State_mgr.get_value(logic_model, "current_step", current_step)
+	GameState = State_mgr.get_value(logic_model, "GameState", GameState)
+	collaide = State_mgr.get_value(logic_model, "collaide", collaide)
+	level = State_mgr.get_value(logic_model, "level", level)
+	score = State_mgr.get_value(logic_model, "score", score)
 
 func get_next_shape_idxs():
 	var idxs = []
@@ -79,17 +102,17 @@ func init(cols, rows):
 	row_count = rows
 	col_count = cols
 	for i in range(row_count * col_count):
-    	model_array.append(0)
+		model_array.append(0)
+	deserialize()
 		
 # Стартуем новую игру и показываем фигуру
 func start():
 	for i in range(row_count * col_count):
-    	model_array[i] = 0
+		model_array[i] = 0
 		
 	GameState = E_RUN
 	level = 1
 	score = 0
-	match_to_next_level = 20
 	current_match = 0
 	bMatched = false
 	next_shape_idx = null
@@ -109,9 +132,9 @@ func add_shape():
 	# Смещаем фигуру на середину игрового поля по горизонтали
 	var trans_vec = [col_count / 2 - current_shape.size() / 2, 0]
 	# Проверяем не выйдет ли фигура за пределы игрового поля
-	if has_collaide(current_shape, trans_vec) == E_NONE:
+	#if has_collaide(current_shape, trans_vec) == E_NONE:
 		# Сдвигаем фигуру и сохраняем в ней новые координаты на указанный вектор
-		translate_shape(current_shape, trans_vec)
+	translate_shape(current_shape, trans_vec)
 		
 # Вращаем фигуру в игровом поле вокруг локальной начальной точки отсчёта
 func rotate_shape(shape, rotate):
@@ -138,8 +161,7 @@ func has_collaide(shape, trans_vec):
 	for item in shape:
 		# Левая, правая и верхняя границы игрового поля
 		if item[0] + trans_vec[0] < 0 \
-		|| item[0] + trans_vec[0] > col_count - 1 \
-		|| item[1] + trans_vec[1] < 0:
+		|| item[0] + trans_vec[0] > col_count - 1:
 			return E_WALLS
 			
 		# Горизонтальное столкновение с предыдущими фигурами
@@ -249,6 +271,7 @@ func next_step(key = ""):
 			
 			# Запускаем следующую фигуру
 			add_shape()
+			serialize()
 	
 		# Записываем позицию текущей фигуры в массив игрового поля
 		for item in current_shape:

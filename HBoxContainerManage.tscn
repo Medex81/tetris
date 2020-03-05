@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://them_font.tres" type="Theme" id=1]
+[ext_resource path="res://Assets/fonts/18612.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Button.gd" type="Script" id=3]
+[ext_resource path="res://ButtonPause.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 18
+font_data = ExtResource( 2 )
+
+[node name="HBoxContainerManage" type="HBoxContainer"]
+margin_right = 148.0
+margin_bottom = 25.0
+
+[node name="ButtonStart" type="Button" parent="."]
+margin_right = 71.0
+margin_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 60, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+toggle_mode = true
+text = "START"
+script = ExtResource( 3 )
+
+[node name="ButtonPause" type="Button" parent="."]
+margin_left = 75.0
+margin_right = 148.0
+margin_bottom = 25.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 60, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 1 )
+disabled = true
+toggle_mode = true
+text = "PAUSE"
+script = ExtResource( 4 )
+
+[connection signal="toggled" from="ButtonStart" to="ButtonPause" method="_on_ButtonStart_toggled"]
+[connection signal="toggled" from="ButtonStart" to="ButtonStart" method="_on_ButtonStart_toggled"]
+[connection signal="toggled" from="ButtonPause" to="ButtonPause" method="_on_ButtonPause_toggled"]
