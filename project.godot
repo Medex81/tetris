@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 State_mgr="*res://Managers/State_mgr.gd"
+Tutorial_mgr="*res://Managers/Tutorial_mgr.gd"
 
 [rendering]
 

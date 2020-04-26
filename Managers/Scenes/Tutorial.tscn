@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/arrows.png" type="Texture" id=1]
+[ext_resource path="res://Managers/Scenes/Tutorial.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 norm_pos;
+uniform vec2 norm_size;
+
+void fragment() 
+{
+	if ((UV.x > norm_pos.x && UV.x < norm_pos.x + norm_size.x)
+	&& (UV.y > norm_pos.y && UV.y < norm_pos.y + norm_size.y))
+	{
+		COLOR.a = 0.0;
+	}  
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/norm_pos = Vector2( 0.2, 0.2 )
+shader_param/norm_size = Vector2( 0.1, 0.1 )
+
+[node name="Back" type="ColorRect"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.75812
+margin_right = -1.75812
+color = Color( 0, 0, 0, 0.501961 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Arrow" type="Sprite" parent="."]
+position = Vector2( 149.758, 169 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 447, 422, 322, 140 )
