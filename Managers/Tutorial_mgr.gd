@@ -28,10 +28,6 @@ func _ready():
 	if tutor_cfg.get("container") && tutor_cfg.container.size() > 0:
 		for step in closed_steps:
 			tutor_cfg.container.erase(step)
-	# 
-
-func _notification(what):
-		
 
 func _serialize():
 	var tutor_steps = {
