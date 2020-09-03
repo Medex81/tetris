@@ -9,6 +9,11 @@ extends ColorRect
 # Отправляем наружу сигналы о состоянии
 # После завершения стартовой анимации, удаляем старую сцену и запускаем скачивание новой
 signal animation_enter_finished
+
+func _ready():
+	print("Transite scene started")
+func _exit_tree():
+	print("Transite scene exit")
 	
 func set_progress_value(value:int):
 	$TextureProgress.value = value

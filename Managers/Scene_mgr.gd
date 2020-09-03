@@ -9,19 +9,21 @@ extends Node
 
 # Транзитную сцену устанавливаем в конкретной реализации или оставляем по умолчанию
 export (PackedScene) var transit_scene_res = preload("res://Managers/Scenes/Transite_scene.tscn")
-export (String) var current_scene_name = "res://mainD.tscn"
+
 # Путь к загружаемой сцене
 var loading_scene = ""
 # Указатель на узел транзитной сцены
 var transite_scene = null
+# Сигнал с именем загруженной новой сцены
+signal scene_changed(name)
 
 func _ready():
-	Resource_mgr.connect("resource_loaded", self, "_on_scene_loaded")
-	Resource_mgr.connect("resource_progress", self, "_on_scene_loading_progress")
-	set_main_scene(current_scene_name)
+	print("Scene manager started")
+	Resource_mgr.connect("resource_loaded", self, "on_scene_loaded")
+	Resource_mgr.connect("resource_progress", self, "on_scene_loading_progress")
 
 # Сцена загружена с диска в виде пакета с ресурсами
-func _on_scene_loaded(path, resource):
+func on_scene_loaded(path:String, resource:PackedScene):
 	var root = get_tree().get_root()
 	# Это нужная нам сцена
 	if loading_scene == path:
@@ -35,22 +37,28 @@ func _on_scene_loaded(path, resource):
 			# Запускаем анимацию после которой транзитная сцена самоудалится 
 			transite_scene.play_exit_animation()
 			transite_scene = null
+			emit_signal("scene_changed", path.get_file().get_basename())
+			print("Enter to scene ", path.get_file().get_basename())
 
 # Инкремент значения в прогрессе транзитной сцены	
-func _on_scene_loading_progress(path, value):
+func on_scene_loading_progress(path:String, value):
 	if transite_scene:
-		transite_scene.set_progress_value(value)
+		transite_scene.set_progress_value(value * 100)
+		print("Loading progress... ", value)
 
 # В транзитной сцене завершилась стартовая анимация с фейдером	
-func _on_transite_scene_animation_enter_finished():
+func on_transite_scene_animation_enter_finished():
+	if !transite_scene:
+		return
 	# Удаляем старую сцену если есть
 	var root = get_tree().get_root()
-	if transite_scene && root.get_child_count() > 1:
+	if root.get_child_count() > 1:
 		var old_scene = root.get_child(root.get_child_count() - 2)
 		old_scene.queue_free()
 		
 	# Начали подкачивать в фоне
 	Resource_mgr.get_resource_async(loading_scene)
+	print("Loading scene... ", loading_scene)
 
 # Установим новую сцену
 # Смена сцен:
@@ -60,15 +68,18 @@ func _on_transite_scene_animation_enter_finished():
 # -Запускаем загрузку новой сцены, прогресс загрузки передаём в транзитную сцену
 # -Загрузка новой сцены завершена, устанавливаем её в дерево перед транзитной(вместо основной)
 # -Запускаем в транзитной сцене анимацию завершения перехода(после завершения анимации сцена самоудалиться)  
-func set_main_scene(path):
+func set_main_scene(path:String):
 	# Сцена которую грузим с диска
+	if path.empty():
+		return
 	loading_scene = path
 	# Запускаем транзитную сцену если она раньше не была запущена
 	if transite_scene == null && get_tree().get_root().get_child_count() > 0:
 		# Стартовая анимация запускается автоматически
 		transite_scene = transit_scene_res.instance()
 		# Ждём завершения анимации
-		transite_scene.connect("animation_enter_finished", self, "_on_transite_scene_animation_enter_finished")
+		transite_scene.connect("animation_enter_finished", self, "on_transite_scene_animation_enter_finished")
 		# Транзитная сцена добавляется в дерево и стартует
 		get_tree().get_root().call_deferred("add_child", transite_scene)
+		transite_scene.play_enter_animation()
 

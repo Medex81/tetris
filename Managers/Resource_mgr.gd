@@ -14,6 +14,7 @@ signal resource_loaded(path, res)
 signal resource_progress(path, progress)
 
 func _ready():
+	print("Resource manager started")
 	mutex = Mutex.new()
 	sem = Semaphore.new()
 	thread = Thread.new()
@@ -89,6 +90,7 @@ func thread_process():
 		else:
 			pending[path] = -1
 		# Отправляем заказчику ресурс и удаляем из списка результатов
+		print("RM. Loaded resource ", path)
 		emit_signal("resource_loaded", path, pending[path])
 		bPath_get = false
 		queue.remove(0)

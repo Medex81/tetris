@@ -27,9 +27,11 @@ State_mgr="*res://Managers/State_mgr.gd"
 Resource_mgr="*res://Managers/Resource_mgr.gd"
 Scene_mgr="*res://Managers/Scene_mgr.gd"
 Tutorial_mgr="*res://Managers/Tutorial_mgr.gd"
+GameObserver="*res://logic/Game_observer.gd"
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"

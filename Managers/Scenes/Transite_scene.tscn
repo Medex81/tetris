@@ -6,7 +6,6 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "enter"
-length = 3.0
 step = 1.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -15,7 +14,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
@@ -23,7 +22,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "exit"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
@@ -31,7 +29,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
@@ -40,6 +38,8 @@ tracks/0/keys = {
 [node name="ColorRect" type="ColorRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 1.50735
+margin_right = 1.50732
 color = Color( 0, 0, 0, 1 )
 script = ExtResource( 3 )
 __meta__ = {
@@ -64,7 +64,6 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "enter"
 anims/enter = SubResource( 1 )
 anims/exit = SubResource( 2 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
